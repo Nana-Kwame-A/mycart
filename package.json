@@ -17,6 +17,7 @@
     "@tamagui/font-inter": "^1.61.3",
     "@tamagui/lucide-icons": "^1.61.3",
     "@tamagui/themes": "^1.61.3",
+    "axios": "^1.6.1",
     "expo": "49.0.9",
     "expo-checkbox": "~2.4.0",
     "expo-constants": "~14.4.2",

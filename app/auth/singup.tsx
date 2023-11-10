@@ -1,24 +1,50 @@
+import React, { useState } from "react";
 import {
-  View,
-  Text,
   Image,
   Pressable,
+  Text,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  View
 } from "react-native";
-import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import COLORS from "../../constants/colors";
 import { Ionicons } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox";
 import { Link, useRouter } from "expo-router";
+
 import Button from "../../components/Button";
+import COLORS from "../../constants/colors";
+import { ACTION_TYPES } from "../../zustand/actionTypes";
+import { usePersistStore } from "../../zustand/store/persistStore";
 
 export default function SignUp() {
   const router = useRouter();
 
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+  const [email, setEmail] = React.useState("");
+  const [phone, setPhone] = React.useState("");
+  const [password, setPassword] = useState("");
+
+  const signup = usePersistStore((state) => state.signup);
+  const actionType = usePersistStore((state) => state.actionType);
+  const resetActionType = usePersistStore((state) => state.restActionType);
+
+  console.log(actionType);
+
+  console.log({
+    email,
+    phone,
+    password
+  });
+
+  React.useEffect(() => {
+    if (actionType === ACTION_TYPES.SIGNUP_SUCCESS) {
+      alert("yo i am here");
+    }
+    resetActionType();
+  }, [actionType]);
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       <View style={{ flex: 1, marginHorizontal: 22 }}>
@@ -71,6 +97,8 @@ export default function SignUp() {
               placeholder="Enter your email address"
               placeholderTextColor={COLORS.black}
               keyboardType="email-address"
+              value={email}
+              onChangeText={(text) => setEmail(text)}
               style={{
                 width: "100%"
               }}
@@ -118,6 +146,8 @@ export default function SignUp() {
               placeholder="Enter your phone number"
               placeholderTextColor={COLORS.black}
               keyboardType="numeric"
+              value={phone}
+              onChangeText={(text) => setPhone(text)}
               style={{
                 width: "80%"
               }}
@@ -152,6 +182,8 @@ export default function SignUp() {
               placeholder="Enter your password"
               placeholderTextColor={COLORS.black}
               secureTextEntry={isPasswordShown}
+              value={password}
+              onChangeText={(text) => setPassword(text)}
               style={{
                 width: "100%"
               }}
@@ -199,6 +231,7 @@ export default function SignUp() {
 
         <Button
           title="Sign Up"
+          onPress={() => signup(email, phone, password)}
           filled
           style={{
             marginTop: 18,

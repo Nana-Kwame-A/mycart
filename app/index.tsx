@@ -1,14 +1,18 @@
-import { View, Text, Pressable, Image } from "react-native";
 import React from "react";
-import { Link, useRouter } from "expo-router";
+import { Image, Pressable, Text, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import COLORS from "../constants/colors";
-import Button from "../components/Button";
+import { Link, useRouter } from "expo-router";
 
+import Button from "../components/Button";
+import COLORS from "../constants/colors";
+import { usePersistStore } from "../zustand/store/persistStore";
 
 export default function Welcome() {
-
   const router = useRouter();
+
+  const user = usePersistStore();
+
+  console.log(user);
 
   return (
     <LinearGradient
