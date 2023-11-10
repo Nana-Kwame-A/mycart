@@ -1,90 +1,180 @@
-import { Github, Twitter } from "@tamagui/lucide-icons";
+import { View, Text, Pressable, Image } from "react-native";
+import React from "react";
 import { Link, useRouter } from "expo-router";
-import {
-  Button,
-  H1,
-  ListItem,
-  Paragraph,
-  Separator,
-  YGroup,
-  YStack
-} from "tamagui";
+import { LinearGradient } from "expo-linear-gradient";
+import COLORS from "../constants/colors";
+import Button from "../components/Button";
 
-import { MyStack } from "../components/MyStack";
 
-export default function Home() {
+export default function Welcome() {
+
   const router = useRouter();
 
   return (
-    <MyStack>
-      <YStack
-        space="$4"
-        maxWidth={600}
-      >
-        <H1 textAlign="center">Welcome to Tamagui.</H1>
-        <Paragraph textAlign="center">
-          Here&apos;s a basic starter to show navigating from one screen to
-          another.
-        </Paragraph>
-      </YStack>
+    <LinearGradient
+      style={{
+        flex: 1
+      }}
+      colors={[COLORS.secondary, COLORS.primary]}
+    >
+      <View style={{ flex: 1 }}>
+        <View>
+          <Image
+            source={require("../assets/hero1.jpg")}
+            style={{
+              height: 100,
+              width: 100,
+              borderRadius: 20,
+              position: "absolute",
+              top: 10,
+              transform: [
+                { translateX: 20 },
+                { translateY: 50 },
+                { rotate: "-15deg" }
+              ]
+            }}
+          />
 
-      <YStack space="$2.5">
-        <Button onPress={() => router.push("/users/testuser")}>
-          Go to user page
-        </Button>
-        <Button onPress={() => router.push("/tabs")}>Go to tabs page</Button>
-      </YStack>
+          <Image
+            source={require("../assets/hero3.jpg")}
+            style={{
+              height: 100,
+              width: 100,
+              borderRadius: 20,
+              position: "absolute",
+              top: -30,
+              left: 100,
+              transform: [
+                { translateX: 50 },
+                { translateY: 50 },
+                { rotate: "-5deg" }
+              ]
+            }}
+          />
 
-      <YStack space="$5">
-        <YGroup
-          bordered
-          separator={<Separator />}
-          theme="green"
+          <Image
+            source={require("../assets/hero3.jpg")}
+            style={{
+              width: 100,
+              height: 100,
+              borderRadius: 20,
+              position: "absolute",
+              top: 130,
+              left: -50,
+              transform: [
+                { translateX: 50 },
+                { translateY: 50 },
+                { rotate: "15deg" }
+              ]
+            }}
+          />
+
+          <Image
+            source={require("../assets/hero2.jpg")}
+            style={{
+              height: 200,
+              width: 200,
+              borderRadius: 20,
+              position: "absolute",
+              top: 110,
+              left: 100,
+              transform: [
+                { translateX: 50 },
+                { translateY: 50 },
+                { rotate: "-15deg" }
+              ]
+            }}
+          />
+        </View>
+
+        {/* content  */}
+
+        <View
+          style={{
+            paddingHorizontal: 22,
+            position: "absolute",
+            top: 400,
+            width: "100%"
+          }}
         >
-          <YGroup.Item>
-            <Link
-              asChild
-              href="https://twitter.com/natebirdman"
-              target="_blank"
+          <Text
+            style={{
+              fontSize: 50,
+              fontWeight: "800",
+              color: COLORS.white
+            }}
+          >
+            Let's Get
+          </Text>
+          <Text
+            style={{
+              fontSize: 46,
+              fontWeight: "800",
+              color: COLORS.white
+            }}
+          >
+            Started
+          </Text>
+
+          <View style={{ marginVertical: 22 }}>
+            <Text
+              style={{
+                fontSize: 16,
+                color: COLORS.white,
+                marginVertical: 4
+              }}
             >
-              <ListItem
-                hoverTheme
-                title="Nate"
-                pressTheme
-                icon={Twitter}
-              />
-            </Link>
-          </YGroup.Item>
-          <YGroup.Item>
-            <Link
-              asChild
-              href="https://github.com/tamagui/tamagui"
-              target="_blank"
+              Looking for a particular product
+            </Text>
+            <Text
+              style={{
+                fontSize: 16,
+                color: COLORS.white
+              }}
             >
-              <ListItem
-                hoverTheme
-                pressTheme
-                title="Tamagui"
-                icon={Github}
-              />
-            </Link>
-          </YGroup.Item>
-          <YGroup.Item>
-            <Link
-              asChild
-              href="https://github.com/ivopr/tamagui-expo"
-              target="_blank"
+              Everything is here
+            </Text>
+          </View>
+          {/* <Button onPress={() => router.push("/Auth/Welcome")}></Button> */}
+          <Button
+            title="Get Started"
+            onPress={() => router.push("/main/(home)/home")}
+            style={{
+              marginTop: 22,
+              width: "100%"
+            }}
+          />
+
+          <View
+            style={{
+              flexDirection: "row",
+              marginTop: 12,
+              justifyContent: "center"
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 16,
+                color: COLORS.white
+              }}
             >
-              <ListItem
-                hoverTheme
-                pressTheme
-                title="This Template"
-                icon={Github}
-              />
-            </Link>
-          </YGroup.Item>
-        </YGroup>
-      </YStack>
-    </MyStack>
+              Already have an account ?
+            </Text>
+            <Pressable onPress={() => router.push("/auth/login")}>
+              <Text
+                style={{
+                  fontSize: 16,
+                  color: COLORS.white,
+                  fontWeight: "bold",
+                  marginLeft: 4
+                }}
+              >
+                Login
+              </Text>
+            </Pressable>
+          </View>
+        </View>
+      </View>
+    </LinearGradient>
   );
 }
